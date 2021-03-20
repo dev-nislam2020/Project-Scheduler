@@ -34,12 +34,12 @@ class Project(models.Model):
 
 class Status(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE)
-    stage = models.CharField(max_length=20, choices=DEVELOPMENT_STAGE)
+    stage_development = models.CharField(verbose_name="Development Stage", max_length=20, choices=DEVELOPMENT_STAGE)
     create_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.stage
+        return self.stage_development
 
 class Stage(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
@@ -47,3 +47,43 @@ class Stage(models.Model):
 
     def __str__(self):
         return str(self.create_at)
+
+class Language(models.Model):
+    name = models.CharField(verbose_name="Language Name", max_length=25, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Framework(models.Model):
+    name = models.CharField(verbose_name="Framework Name", max_length=25, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Logical(models.Model):
+    project = models.OneToOneField(Project, on_delete=models.CASCADE)
+    language = models.ManyToManyField(Language, blank=True)
+    framework = models.ManyToManyField(Framework, blank=True)
+    db_name = models.CharField(verbose_name="Database Name", max_length=25, unique=True)
+    create_at = models.DateField(auto_now_add=True)
+    update_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.create_at)
+
+class Interface(models.Model):
+    project = models.OneToOneField(Project, on_delete=models.CASCADE)
+    language = models.ManyToManyField(Language, blank=True)
+    framework = models.ManyToManyField(Framework, blank=True)
+    create_at = models.DateField(auto_now_add=True)
+    update_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.create_at)
+
+class Feature(models.Model):
+    project = models.OneToOneField(Project, on_delete=models.CASCADE)
+    name = models.CharField(verbose_name="DB Model Name", max_length=50, unique=True)
+    oparetion = models.CharField(verbose_name="DB Model Oparetion", max_length=25)
+    notes = models.TextField(verbose_name="Feature Notes", blank=True, null=True)
+
