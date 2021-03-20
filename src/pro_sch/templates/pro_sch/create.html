@@ -1,9 +1,9 @@
 {% extends 'pro_sch/base/base.html' %}
 
-{% block title %}Add Project{% endblock title %}
+{% block title %}{{page_name}}{% endblock title %}
 
 {% block content %}
-<h3>Add Project:</h3>
+<h3>{{page_name}}:</h3>
 <form method="post">
 {% csrf_token %}
   <table>
@@ -14,7 +14,7 @@
     {% endif %}
     {% include 'pro_sch/base/form.html' with form=form %}
     <tr>
-      <td colspan="1"><input type="submit" value="Next"></td>
+      <td colspan="1"><input type="submit" value="Submit"></td>
     </tr>
   </table>
 </form>

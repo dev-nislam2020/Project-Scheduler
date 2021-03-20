@@ -1,9 +1,9 @@
 <nav>
   <div>
     <span>Project Scheduler -- </span>
-    <a href="#">Home</a><span> -- </span>
+    <a href="{% url 'home' %}">Home</a><span> -- </span>
     <a href="{% url 'project-create' %}">Project</a><span> -- </span>
-    <a href="#">Language</a><span> -- </span>
+    <a href="{% url 'language-create' %}">Language</a><span> -- </span>
     <a href="#">Framework</a>
   </div>
 </nav>
