@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from pro_sch.forms import FrameworkForm, LanguageForm, ProjectForm
+from pro_sch.forms import FrameworkForm, LanguageForm, LogicalForm, ProjectForm
 
 
 # Create your views here.
@@ -40,6 +40,17 @@ class FrameworkCreateView(CreateView):
         context = super(FrameworkCreateView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Framework"
+        return context
+
+class LogicalCreateView(CreateView):
+    form_class = LogicalForm
+    template_name = "pro_sch/create.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LogicalCreateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Add Backend"
         return context
 
 

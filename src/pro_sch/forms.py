@@ -1,6 +1,6 @@
 from django import forms
 
-from pro_sch.models import Framework, Language, Project
+from pro_sch.models import Framework, Language, Logical, Project
 
 
 # Create your forms here.
@@ -21,3 +21,8 @@ class FrameworkForm(forms.ModelForm):
     class Meta:
         model = Framework
         fields = ['name']
+
+class LogicalForm(forms.ModelForm):
+    class Meta:
+        model = Logical
+        fields = ['language', 'framework', 'db_name']
