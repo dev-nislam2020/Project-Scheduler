@@ -18,8 +18,8 @@ DEVELOPMENT_STAGE = (
 )
 
 class Project(models.Model):
-    name = models.CharField(verbose_name="Project Name", max_length=100, unique=True)
-    deadline = models.DateField(verbose_name="Project Deadline")
+    name = models.CharField(verbose_name="Name", max_length=100, unique=True, )
+    deadline = models.DateField(verbose_name="Deadline")
     app_type = models.CharField(verbose_name="Development", max_length=20, choices=APP_TYPE)
     is_completed = models.BooleanField(default=False)
     is_requirement_completed = models.BooleanField(default=False)
@@ -49,13 +49,13 @@ class Stage(models.Model):
         return str(self.create_at)
 
 class Language(models.Model):
-    name = models.CharField(verbose_name="Language Name", max_length=25, unique=True)
+    name = models.CharField(verbose_name="Name", max_length=25, unique=True)
 
     def __str__(self):
         return self.name
 
 class Framework(models.Model):
-    name = models.CharField(verbose_name="Framework Name", max_length=25, unique=True)
+    name = models.CharField(verbose_name="Name", max_length=25, unique=True)
 
     def __str__(self):
         return self.name
