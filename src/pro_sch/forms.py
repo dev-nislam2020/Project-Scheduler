@@ -1,7 +1,7 @@
 from django import forms
 
 from pro_sch.models import (Feature, Framework, Interface, Language, Logical,
-                            Project)
+                            Project, Status)
 
 
 # Create your forms here.
@@ -37,3 +37,8 @@ class FeatureForm(forms.ModelForm):
     class Meta:
         model = Feature
         fields = ['name', 'oparetion', 'notes']
+
+class StatusForm(forms.ModelForm):
+    class Meta:
+        model = Status
+        fields = ['stage_development']
