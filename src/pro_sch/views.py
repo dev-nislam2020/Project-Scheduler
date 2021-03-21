@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from pro_sch.forms import (FeatureForm, FrameworkForm, InterfaceForm,
                            LanguageForm, LogicalForm, ProjectForm, StatusForm)
-from pro_sch.models import Status
+from pro_sch.models import Framework, Language, Status
 
 
 # Create your views here.
@@ -33,6 +33,18 @@ class LanguageCreateView(CreateView):
         context['page_name'] = "Add Language"
         return context
 
+class LanguageUpdateView(UpdateView):
+    form_class = LanguageForm
+    queryset = Language.objects.all()
+    template_name = "pro_sch/create.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LanguageUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Project Language Update"
+        return context
+
 class FrameworkCreateView(CreateView):
     form_class = FrameworkForm
     template_name = "pro_sch/create.html"
@@ -43,6 +55,20 @@ class FrameworkCreateView(CreateView):
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Framework"
         return context
+
+
+class FrameworkUpdateView(UpdateView):
+    form_class = FrameworkForm
+    queryset = Framework.objects.all()
+    template_name = "pro_sch/create.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FrameworkUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Project Framework Update"
+        return context
+
 
 class LogicalCreateView(CreateView):
     form_class = LogicalForm
