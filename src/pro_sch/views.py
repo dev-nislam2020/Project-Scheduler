@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, reverse
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from pro_sch.forms import (FeatureForm, FrameworkForm, InterfaceForm,
                            LanguageForm, LogicalForm, ProjectForm, StatusForm)
-from pro_sch.models import Framework, Language, Status
+from pro_sch.models import Framework, Language, Project, Status
 
 
 # Create your views here.
@@ -21,6 +21,10 @@ class ProjectCreateView(CreateView):
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Project"
         return context
+    
+    def get_success_url(self):
+        project = Project.objects.order_by('-pk')[0]
+        return reverse('backend-create', kwargs={'pk': project.pk}) 
 
 class LanguageCreateView(CreateView):
     form_class = LanguageForm
@@ -80,6 +84,14 @@ class LogicalCreateView(CreateView):
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Backend"
         return context
+    
+    def form_valid(self, form):
+        self.project = get_object_or_404(Project, id=self.kwargs['pk'])
+        form.instance.project = self.project
+        return super(LogicalCreateView, self).form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('frontend-create', kwargs={'pk': self.kwargs['pk']}) 
 
 class InterfaceCreateView(CreateView):
     form_class = InterfaceForm
@@ -91,6 +103,14 @@ class InterfaceCreateView(CreateView):
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Frontend"
         return context
+
+    def form_valid(self, form):
+        self.project = get_object_or_404(Project, id=self.kwargs['pk'])
+        form.instance.project = self.project
+        return super(InterfaceCreateView, self).form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('home')
 
 class FeatureCreateView(CreateView):
     form_class = FeatureForm
