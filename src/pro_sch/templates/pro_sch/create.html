@@ -16,4 +16,10 @@
     </tr>
   </table>
 </form>
+{% if is_language %}
+<p><a href="{% url 'language-list' %}">Language List</a></p>
+{% endif %}
+{% if is_framework %}
+<p><a href="{% url 'framework-list' %}">Framework List</a></p>
+{% endif %}
 {% endblock content %}

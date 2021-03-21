@@ -35,7 +35,22 @@ class LanguageCreateView(CreateView):
         context = super(LanguageCreateView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Language"
+        context['is_language'] = True
         return context
+
+class LanguageListView(ListView):
+    queryset = Language.objects.all()
+    template_name = "pro_sch/list.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LanguageListView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Language List"
+        context['name'] = "Language"
+        context['is_language'] = True
+        return context
+
 
 class LanguageUpdateView(UpdateView):
     form_class = LanguageForm
@@ -46,8 +61,11 @@ class LanguageUpdateView(UpdateView):
         # Call the base implementation first to get a context
         context = super(LanguageUpdateView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['page_name'] = "Project Language Update"
+        context['page_name'] = "Language Update"
         return context
+    
+    def get_success_url(self):
+        return reverse('language-list')
 
 class FrameworkCreateView(CreateView):
     form_class = FrameworkForm
@@ -58,8 +76,21 @@ class FrameworkCreateView(CreateView):
         context = super(FrameworkCreateView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Framework"
+        context['is_framework'] = True
         return context
 
+class FrameworkListView(ListView):
+    queryset = Framework.objects.all()
+    template_name = "pro_sch/list.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FrameworkListView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Framework List"
+        context['name'] = "Framework"
+        context['is_framework'] = True
+        return context
 
 class FrameworkUpdateView(UpdateView):
     form_class = FrameworkForm
@@ -70,9 +101,11 @@ class FrameworkUpdateView(UpdateView):
         # Call the base implementation first to get a context
         context = super(FrameworkUpdateView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['page_name'] = "Project Framework Update"
+        context['page_name'] = "Framework Update"
         return context
 
+    def get_success_url(self):
+        return reverse('framework-list')
 
 class LogicalCreateView(CreateView):
     form_class = LogicalForm
@@ -91,7 +124,7 @@ class LogicalCreateView(CreateView):
         return super(LogicalCreateView, self).form_valid(form)
     
     def get_success_url(self):
-        return reverse('frontend-create', kwargs={'pk': self.kwargs['pk']}) 
+        return reverse('frontend-create', kwargs={'pk': self.kwargs['pk']})
 
 class InterfaceCreateView(CreateView):
     form_class = InterfaceForm
