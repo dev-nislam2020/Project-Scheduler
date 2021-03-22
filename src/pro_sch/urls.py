@@ -21,7 +21,9 @@ urlpatterns = [
     path('backend/<int:pk>/create/', LogicalCreateView.as_view(), name='backend-create'),
     path('frontend/<int:pk>/create/', InterfaceCreateView.as_view(), name='frontend-create'),
 
-    path('feature/create/', FeatureCreateView.as_view(), name='feature-create'),
+    path('feature/<int:pk>/create/', FeatureCreateView.as_view(), name='feature-create'),
+    path('feature/<int:pk>/update/', FeatureCreateView.as_view(), name='feature-update'),
+    path('feature/list/', FeatureCreateView.as_view(), name='feature-list'),
 
     path('status/<int:pk>/update/', StatusUpdateView.as_view(), name='status-update'),
 ]
