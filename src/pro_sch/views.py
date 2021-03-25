@@ -58,18 +58,17 @@ class ProjectDetailView(DetailView):
         context['page_name'] = "Project Detail"
         project = context['object']
 
-        logical = Logical.objects.filter(project=project).first()
+        logical = project.logical
         context['logical_language_list'] = logical.language.all()
         context['logical_framework_list'] = logical.framework.all()
         context['logical'] = logical
-        # print(logical.language.all())
 
-        interface = Interface.objects.filter(project=project).first()
+        interface = project.interface
         context['interface_language_list'] = interface.language.all()
         context['interface_framework_list'] = interface.framework.all()
         context['interface'] = interface
 
-        status = Status.objects.filter(project=project).first()
+        status = project.status
         context['status'] = status
 
         return context
