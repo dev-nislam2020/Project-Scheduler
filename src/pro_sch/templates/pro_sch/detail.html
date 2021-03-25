@@ -1,0 +1,94 @@
+{% extends 'pro_sch/base/base.html' %}
+
+{% block title %}Detail{% endblock title %}
+
+{% block content %}
+<h2>{{page_name}}</h2>
+<h3>{{object.name}} (Time Left 2 Day)</h3>
+<table>
+  <tr>
+    <td>Arrived :</td>
+    <td>{{object.create_at}}</td>
+  </tr>
+  <tr>
+    <td>Application Type :</td>
+    <td>{{object.get_app_type_display}}</td>
+  </tr>
+  <tr>
+    <td>Deadline :</td>
+    <td>{{object.deadline}}</td>
+  </tr>
+  <tr>
+    <td>Edit :</td>
+    <td><a href="">Link</a></td>
+  </tr>
+  <tr>
+    <td><b>Backend Requirement</b></td>
+  </tr>
+  <tr>
+    <td>Language :</td>
+    <td>{% for language in logical_language_list %}
+    {{language.name}}
+    {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td>Framework :</td>
+    <td>{% for framework in logical_framework_list %}
+    {{framework.name}}
+    {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td>Database :</td>
+    <td>{{logical.db_name}}</td>
+  </tr>
+  <tr>
+    <td>Edit :</td>
+    <td><a href="">Link</a></td>
+  </tr>
+  <tr>
+    <td><b>Frontend Requirement</b></td>
+  </tr>
+  <tr>
+    <td>Language :</td>
+    <td>{% for language in interface_language_list %}
+    {{language.name}}
+    {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td>Framework :</td>
+    <td>{% for framework in interface_framework_list %}
+    {{framework.name}}
+    {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td>Edit :</td>
+    <td><a href="">Link</a></td>
+  </tr>
+  <tr>
+    <td><b>Development Status</b></td>
+  </tr>
+  <tr>
+    <td>Status :</td>
+    <td>{{status.stage_development}}</td>
+  </tr>
+  <tr>
+    <td>Edit :</td>
+    <td><a href="">Link</a></td>
+  </tr>
+  <tr>
+    <td><b>Development Stage Report</b></td>
+  </tr>
+  <tr>
+    <td>Stage :</td>
+    <td>{{status.stage_development}}</td>
+  </tr>
+  <tr>
+    <td>Report :</td>
+    <td>{{status.stage_development}}</td>
+  </tr>
+</table>
+{% endblock content %}

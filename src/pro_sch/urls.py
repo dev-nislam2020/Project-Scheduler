@@ -5,10 +5,11 @@ from pro_sch.views import (FeatureCreateView, FrameworkCreateView,
                            InterfaceCreateView, LanguageCreateView,
                            LanguageListView, LanguageUpdateView,
                            LogicalCreateView, ProjectCreateView,
-                           StatusUpdateView)
+                           ProjectDetailView, StatusUpdateView)
 
 urlpatterns = [
     path('project/create/', ProjectCreateView.as_view(), name='project-create'),
+    path('project/<int:pk>/detail/', ProjectDetailView.as_view(), name='project-detail'),
 
     path('language/create/', LanguageCreateView.as_view(), name='language-create'),
     path('language/list/', LanguageListView.as_view(), name='language-list'),

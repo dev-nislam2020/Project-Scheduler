@@ -4,7 +4,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from pro_sch.forms import (FeatureForm, FrameworkForm, InterfaceForm,
                            LanguageForm, LogicalForm, ProjectForm, StatusForm)
-from pro_sch.models import Framework, Language, Project, Status
+from pro_sch.models import (Framework, Interface, Language, Logical, Project,
+                            Status)
 
 
 # Create your views here.
@@ -16,7 +17,7 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Project"
-        
+
         status_obj_list = Status.objects.filter(stage_development="Init Project")
         context['new_project_list'] = status_obj_list
         context['new_project_count'] = status_obj_list.count()
@@ -44,7 +45,35 @@ class ProjectCreateView(CreateView):
     
     def get_success_url(self):
         project = Project.objects.order_by('-pk')[0]
-        return reverse('backend-create', kwargs={'pk': project.pk}) 
+        return reverse('backend-create', kwargs={'pk': project.pk})
+
+class ProjectDetailView(DetailView):
+    queryset = Project.objects.all()
+    template_name = "pro_sch/detail.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Project Detail"
+        project = context['object']
+
+        logical = Logical.objects.filter(project=project).first()
+        context['logical_language_list'] = logical.language.all()
+        context['logical_framework_list'] = logical.framework.all()
+        context['logical'] = logical
+        # print(logical.language.all())
+
+        interface = Interface.objects.filter(project=project).first()
+        context['interface_language_list'] = interface.language.all()
+        context['interface_framework_list'] = interface.framework.all()
+        context['interface'] = interface
+
+        status = Status.objects.filter(project=project).first()
+        context['status'] = status
+
+        return context
+    
 
 class LanguageCreateView(CreateView):
     form_class = LanguageForm
