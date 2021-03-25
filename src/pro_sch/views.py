@@ -201,6 +201,23 @@ class LogicalCreateView(CreateView):
     def get_success_url(self):
         return reverse('frontend-create', kwargs={'pk': self.kwargs['pk']})
 
+
+class LogicalUpdateView(UpdateView):
+    form_class = LogicalForm
+    queryset = Logical.objects.all()
+    template_name = "pro_sch/create.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LogicalUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Backend Update"
+        return context
+    
+    def get_success_url(self):
+        return reverse('home')
+
+
 class InterfaceCreateView(CreateView):
     form_class = InterfaceForm
     template_name = "pro_sch/create.html"
@@ -216,6 +233,21 @@ class InterfaceCreateView(CreateView):
         self.project = get_object_or_404(Project, id=self.kwargs['pk'])
         form.instance.project = self.project
         return super(InterfaceCreateView, self).form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('home')
+
+class InterfaceUpdateView(UpdateView):
+    form_class = InterfaceForm
+    queryset = Interface.objects.all()
+    template_name = "pro_sch/create.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(InterfaceUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "front Update"
+        return context
     
     def get_success_url(self):
         return reverse('home')

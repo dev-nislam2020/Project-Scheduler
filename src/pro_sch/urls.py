@@ -2,9 +2,10 @@ from django.urls import path
 
 from pro_sch.views import (FeatureCreateView, FrameworkCreateView,
                            FrameworkListView, FrameworkUpdateView,
-                           InterfaceCreateView, LanguageCreateView,
-                           LanguageListView, LanguageUpdateView,
-                           LogicalCreateView, ProjectCreateView,
+                           InterfaceCreateView, InterfaceUpdateView,
+                           LanguageCreateView, LanguageListView,
+                           LanguageUpdateView, LogicalCreateView,
+                           LogicalUpdateView, ProjectCreateView,
                            ProjectDeleteView, ProjectDetailView,
                            ProjectUpdateView, StatusUpdateView)
 
@@ -23,7 +24,10 @@ urlpatterns = [
     path('framework/<int:pk>/update/', FrameworkUpdateView.as_view(), name='framework-update'),
 
     path('backend/<int:pk>/create/', LogicalCreateView.as_view(), name='backend-create'),
+    path('backend/<int:pk>/update/', LogicalUpdateView.as_view(), name='backend-update'),
+
     path('frontend/<int:pk>/create/', InterfaceCreateView.as_view(), name='frontend-create'),
+    path('frontend/<int:pk>/update/', InterfaceUpdateView.as_view(), name='frontend-update'),
 
     path('feature/<int:pk>/create/', FeatureCreateView.as_view(), name='feature-create'),
     path('feature/<int:pk>/update/', FeatureCreateView.as_view(), name='feature-update'),
