@@ -1,0 +1,28 @@
+{% extends 'pro_sch/base/base.html' %}
+
+{% block title %}Delete{% endblock title %}
+
+{% block content %}
+<h2>{{page_name}}</h2>
+<h3>{{object.name}}</h3>
+<form method="post">
+{% csrf_token %}
+<table>
+  <tr>
+    <td>Arrived :</td>
+    <td>{{object.create_at}}</td>
+  </tr>
+  <tr>
+    <td>Application Type :</td>
+    <td>{{object.get_app_type_display}}</td>
+  </tr>
+  <tr>
+    <td>Deadline :</td>
+    <td>{{object.deadline}}</td>
+  </tr>
+  <tr>
+    <td colspan="1"><input type="submit" value="Submit"></td>
+  </tr>
+</table>
+</form>
+{% endblock content %}
