@@ -16,6 +16,19 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['page_name'] = "Add Project"
+        
+        status_obj_list = Status.objects.filter(stage_development="Init Project")
+        context['new_project_list'] = status_obj_list
+        context['new_project_count'] = status_obj_list.count()
+
+        status_obj_list = Status.objects.exclude(stage_development="Deploy")
+        status_obj_list = status_obj_list.exclude(stage_development="Init Project")
+        context['development_project_list'] = status_obj_list
+        context['development_project_count'] = status_obj_list.count()
+
+        status_obj_list = Status.objects.filter(stage_development="Deploy")
+        context['completed_project_list'] = status_obj_list
+        context['completed_project_count'] = status_obj_list.count()
         return context
 
 class ProjectCreateView(CreateView):
@@ -183,3 +196,6 @@ class StatusUpdateView(UpdateView):
         # Add in a QuerySet of all the books
         context['page_name'] = "Project Status Update"
         return context
+    
+    def get_success_url(self):
+        return reverse('home')

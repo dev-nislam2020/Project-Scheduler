@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th colspan="1">#ID</th>
+    <th colspan="2">Arrived</th>
+    <th colspan="5">Project Name</th>
+    <th colspan="2">Apps Type</th>
+    <th colspan="2">Deadline</th>
+    <th colspan="2">Status</th>
+  </tr>
+  {% for object in object_list %}
+  <tr>
+    <td colspan="1">{{ forloop.counter }} :</td>
+    <td colspan="2">{{object.create_at}}</td>
+    <td colspan="5"><a href="#">{{object.project.name}}</a></td>
+    <td colspan="2">{{object.project.get_app_type_display}}</td>
+    <td colspan="2">{{object.project.deadline}}</td>
+    <td colspan="2"><a href="{% url 'status-update' object.pk %}">{{object.stage_development}}</td>
+  </tr>
+  {% endfor %}
+</table>
