@@ -3,6 +3,38 @@
 {% block title %}{{page_name}}{% endblock title %}
 
 {% block content %}
+{% if is_feature %}
+<table>
+  <tr>
+    <td>Add :</td>
+    <td><a href="{% url 'feature-create' project_pk %}">New Feature</a></td>
+  </tr>
+  {% if object_list %}
+    {% for object in object_list %}
+  <tr>
+    <td>Model :</td>
+    <td>{{object.name}}</td>
+  </tr>
+  <tr>
+    <td>Model Oparetion :</td>
+    <td>{{object.oparetion}}</td>
+  </tr>
+  <tr>
+    <td>Notes :</td>
+    <td>{{object.notes}}</td>
+  </tr>
+  <tr>
+    <td>Edit :</td>
+    <td><a href="{% url 'feature-update' object.pk %}">Link</a></td>
+  </tr>
+    {% endfor %}
+  {% else %}
+  <tr>
+    <td>There is no feature.</td>
+  </tr>
+  {% endif %}
+</table>
+{% else %}
 <h3>{{page_name}}</h3>
 <table>
   <tr>
@@ -23,4 +55,5 @@
   </tr>
     {% endfor %}
 </table>
+{% endif %}
 {% endblock content %}

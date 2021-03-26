@@ -1,6 +1,7 @@
 from django.urls import path
 
-from pro_sch.views import (FeatureCreateView, FrameworkCreateView,
+from pro_sch.views import (FeatureCreateView, FeatureListView,
+                           FeatureUpdateView, FrameworkCreateView,
                            FrameworkListView, FrameworkUpdateView,
                            InterfaceCreateView, InterfaceUpdateView,
                            LanguageCreateView, LanguageListView,
@@ -30,8 +31,8 @@ urlpatterns = [
     path('frontend/<int:pk>/update/', InterfaceUpdateView.as_view(), name='frontend-update'),
 
     path('feature/<int:pk>/create/', FeatureCreateView.as_view(), name='feature-create'),
-    path('feature/<int:pk>/update/', FeatureCreateView.as_view(), name='feature-update'),
-    path('feature/list/', FeatureCreateView.as_view(), name='feature-list'),
+    path('feature/<int:pk>/update/', FeatureUpdateView.as_view(), name='feature-update'),
+    path('feature/<int:pk>/list/', FeatureListView.as_view(), name='feature-list'),
 
     path('status/<int:pk>/update/', StatusUpdateView.as_view(), name='status-update'),
 ]

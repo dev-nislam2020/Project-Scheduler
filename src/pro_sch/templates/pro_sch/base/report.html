@@ -5,6 +5,7 @@
     <th colspan="5">Project Name</th>
     <th colspan="2">Apps Type</th>
     <th colspan="2">Deadline</th>
+    <th colspan="2">Feature</th>
     <th colspan="2">Status</th>
   </tr>
   {% for object in object_list %}
@@ -14,6 +15,7 @@
     <td colspan="5"><a href="{% url 'project-detail' object.pk %}">{{object.project.name}}</a></td>
     <td colspan="2">{{object.project.get_app_type_display}}</td>
     <td colspan="2">{{object.project.deadline}}</td>
+    <td colspan="2"><a href="{% url 'feature-list' object.pk %}">Project Feature</a></td>
     <td colspan="2"><a href="{% url 'status-update' object.pk %}">{{object.stage_development}}</a></td>
   </tr>
   {% endfor %}

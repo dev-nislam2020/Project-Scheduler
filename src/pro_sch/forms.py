@@ -8,8 +8,9 @@ from pro_sch.models import (Feature, Framework, Interface, Language, Logical,
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'app_type', 'deadline']
+        fields = ['create_at', 'name', 'app_type', 'deadline']
         widgets = {
+            'create_at': forms.DateInput(attrs={'type': 'date'}),
             'deadline': forms.DateInput(attrs={'type': 'date'}),
         }
 

@@ -23,7 +23,7 @@ class Project(models.Model):
     app_type = models.CharField(verbose_name="Development", max_length=20, choices=APP_TYPE)
     is_completed = models.BooleanField(default=False)
     is_requirement_completed = models.BooleanField(default=False)
-    create_at = models.DateField(auto_now_add=True)
+    create_at = models.DateField(verbose_name="Init Date")
     update_at = models.DateField(auto_now=True)
 
     class Meta:

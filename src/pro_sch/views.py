@@ -4,8 +4,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from pro_sch.forms import (FeatureForm, FrameworkForm, InterfaceForm,
                            LanguageForm, LogicalForm, ProjectForm, StatusForm)
-from pro_sch.models import (Framework, Interface, Language, Logical, Project,
-                            Status)
+from pro_sch.models import (Feature, Framework, Interface, Language, Logical,
+                            Project, Status)
 
 
 # Create your views here.
@@ -270,6 +270,38 @@ class FeatureCreateView(CreateView):
     def get_success_url(self):
         return reverse('home')
 
+
+class FeatureListView(ListView):
+    template_name = "pro_sch/list.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FeatureListView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Project Feature List"
+        context['is_feature'] = True
+        context['project_pk'] = self.kwargs['pk']
+        return context
+    
+    def get_queryset(self):
+        self.project = get_object_or_404(Project, id=self.kwargs['pk'])
+        return Feature.objects.filter(project=self.project)
+
+
+class FeatureUpdateView(UpdateView):
+    form_class = FeatureForm
+    queryset = Feature.objects.all()
+    template_name = "pro_sch/create.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FeatureUpdateView, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['page_name'] = "Project Feature Update"
+        return context
+    
+    def get_success_url(self):
+        return reverse('home')
 
 class StatusUpdateView(UpdateView):
     form_class = StatusForm
